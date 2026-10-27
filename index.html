@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>رسالة إلى الوطن | تفعيل المادة 34</title>
+  <meta name="description" content="مبادرة وطنية تفاعلية من المتوسطة السادسة بالقطيف - تفعيل المادة 34 من النظام الأساسي للحكم" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --saudi-green: #006C35;
+      --saudi-green-dark: #004d26;
+      --saudi-green-light: #008c45;
+      --gold: #C5A46E;
+      --gold-light: #f4ebd0;
+      --white: #ffffff;
+      --off-white: #f4f8f5;
+      --text-dark: #1a1a1a;
+      --shadow: 0 10px 30px rgba(0, 108, 53, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #f0f7f2 0%, #ffffff 50%, #f4f8f5 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--saudi-green-dark) 0%, var(--saudi-green) 100%);
+      color: white;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: -30px auto 3rem;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      border: 1px solid rgba(0, 108, 53, 0.1);
+    }
+
+    .school-info {
+      text-align: center;
+      background: linear-gradient(135deg, #eaf4ed, #f4ebd033);
+      border-right: 5px solid var(--gold);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .school-info h3 {
+      color: var(--saudi-green-dark);
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .school-info p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .article-box {
+      background: #f9fbf9;
+      border-right: 5px solid var(--saudi-green);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .article-box h4 {
+      color: var(--saudi-green);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .article-box p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* التفاعل وبناء الخريطة */
+    .map-section {
+      text-align: center;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8f5 100%);
+    }
+
+    .counter-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(197, 164, 110, 0.3);
+    }
+
+    /* شكل خريطة تفاعلية تكتمل مع الرسائل */
+    .saudi-map-container {
+      width: 260px;
+      height: 260px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 8px 25px rgba(0,0,0,0.1);
+      border: 4px solid var(--gold);
+    }
+
+    .map-fill-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(0deg, var(--saudi-green) 0%, var(--saudi-green-light) 100%);
+      transition: height 0.6s ease-in-out;
+      z-index: 1;
+    }
+
+    .map-content-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--text-dark);
+      padding: 1rem;
+    }
+
+    .map-content-overlay .map-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.3rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .map-content-overlay h4 {
+      font-family: 'Amiri', serif;
+      font-size: 1.3rem;
+      color: var(--saudi-green-dark);
+      font-weight: 700;
+    }
+
+    .map-content-overlay p {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #444;
+    }
+
+    /* نموذج إرسال الرسالة */
+    .form-group {
+      margin-bottom: 1.2rem;
+      text-align: right;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--saudi-green-dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--saudi-green);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--saudi-green), var(--saudi-green-light));
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 108, 53, 0.3);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 108, 53, 0.4);
+    }
+
+    /* قائمة الرسائل المنشورة */
+    .messages-wall {
+      margin-top: 2rem;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .message-item {
+      background: #f8fbf9;
+      border-left: 4px solid var(--gold);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      text-align: right;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .message-item .author {
+      font-size: 0.85rem;
+      color: var(--saudi-green);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .message-item p {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #e0e0e0;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🇸🇦 رسالة إلى الوطن 🇸🇦</h1>
+    <p>مبادرة وطنية لتفعيل المادة 34 من النظام الأساسي للحكم</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- معلومات المدرسة وإشراف الإدارة -->
+    <div class="card school-info">
+      <h3>المتوسطة السادسة بالقطيف</h3>
+      <p><strong>إشراف مديرة المدرسة:</strong> لطيفة عبدالله الدوسري &nbsp;|&nbsp; <strong>إعداد المعلمة:</strong> وجدان عبدالرحمن الزهراني</p>
+    </div>
+
+    <!-- نص المادة 34 -->
+    <div class="card">
+      <div class="article-box">
+        <h4>📜 المادة الرابعة والثلاثون من النظام الأساسي للحكم:</h4>
+        <p>«الدفاع عن العقيدة الإسلامية، والمجتمع والوطن واجب على كل مواطن، و النظام يحدد أحكام الخدمة العسكرية.»</p>
+      </div>
+      <p style="text-align: justify; color: #555; margin-top: 1rem;">
+        تأتي هذه المبادرة تعزيزاً للانتماء الوطني، وولاءً لبلدنا المعطاء وقيادتنا الحكيمة حفظها الله، وتأكيداً على دور الطالبات والمجتمع في الذود عن حمى الوطن الغالي وخدمته بكل إخلاص وتفانٍ.
+      </p>
+    </div>
+
+    <!-- قسم تفاعل الخريطة وجمع الرسائل (30 رسالة) -->
+    <div class="card map-section">
+      <h2 style="color: var(--saudi-green-dark); font-family: 'Amiri', serif; margin-bottom: 0.5rem;">خريطة ولاء الوطن التفاعلية</h2>
+      <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">شارك برسالتك لدعم وتفعيل المادة 34، وكلما شارك الجميع اقتربت خريطة المملكة من الاكتمال (الهدف: 30 رسالة وطنية)</p>
+
+      <div class="counter-badge" id="counterText">الرسائل المشاركة: 0 / 30</div>
+
+      <!-- حاوية شكل الخريطة التي ترتفع تدريجياً -->
+      <div class="saudi-map-container" id="mapContainer">
+        <div class="map-fill-bg" id="mapFill" style="height: 0%;"></div>
+        <div class="map-content-overlay">
+          <div class="map-icon">🇸🇦</div>
+          <h4 id="mapStatusTitle">نبض الوطن</h4>
+          <p id="mapStatusDesc">في انتظار نبضاتكم...</p>
+        </div>
+      </div>
+
+      <!-- نموذج الكتابة -->
+      <form id="messageForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="senderName">الاسم الكريم (أو الصف الدراسي):</label>
+          <input type="text" id="senderName" class="form-control" placeholder="مثال: طالبة من المتوسطة السادسة / أو زائرة حرة" required />
+        </div>
+        <div class="form-group">
+          <label for="senderMsg">رسالتك القصيرة للوطن وللدفاع عنه:</label>
+          <textarea id="senderMsg" class="form-control" placeholder="اكتب عبارة ولاء أو فخر أو دفاع عن الوطن..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">إرسال رسالة الولاء 💚</button>
+      </form>
+
+      <!-- حائط الرسائل -->
+      <div class="messages-wall" id="messagesWall">
+        <!-- ستظهر الرسائل هنا تدريجياً -->
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>جميع الحقوق محفوظة © المتوسطة السادسة بالقطيف | تنفيذ وإعداد: وجدان الزهراني 🇸🇦</p>
+  </footer>
+
+  <script>
+    // تحميل الرسائل المحفوظة مسبقاً إن وجدت
+    let messages = JSON.parse(localStorage.getItem('saudi_messages')) || [
+      { name: "أ. لطيفة الدوسري (مديرة المدرسة)", text: "دامت راية توحيدنا خفاقة، وحفظ الله قائدنا ووطننا الشامخ." },
+      { name: "أ. وجدان الزهراني", text: "الوطن أمانة في أعناقنا، والدفاع عنه واجب مقدس نعتز به." }
+    ];
+
+    const targetCount = 30;
+
+    function updateDisplay() {
+      const wall = document.getElementById('messagesWall');
+      const counterText = document.getElementById('counterText');
+      const mapFill = document.getElementById('mapFill');
+      const mapStatusTitle = document.getElementById('mapStatusTitle');
+      const mapStatusDesc = document.getElementById('mapStatusDesc');
+
+      wall.innerHTML = '';
+      messages.slice().reverse().forEach(msg => {
+        const div = document.createElement('div');
+        div.className = 'message-item';
+        div.innerHTML = `<div class="author">👤 ${escapeHtml(msg.name)}</div><p>${escapeHtml(msg.text)}</p>`;
+        wall.appendChild(div);
+      });
+
+      const count = messages.length;
+      counterText.innerText = `الرسائل المشاركة: ${count} / ${targetCount}`;
+
+      // حساب نسبة امتلاء الخريطة (بحد أقصى 100%)
+      let percentage = Math.min(100, (count / targetCount) * 100);
+      mapFill.style.height = percentage + '%';
+
+      if (count >= targetCount) {
+        mapStatusTitle.innerText = "اكتملت خريطة المجد! 🌟";
+        mapStatusDesc.innerText = "بدمائنا وعزيمتنا نحمي الوطن الشامخ";
+      } else {
+        mapStatusTitle.innerText = "خريطة الوطن تتشكل";
+        mapStatusDesc.innerText = `متبقي ${targetCount - count} رسالة لتكتمل الخريطة بالكامل`;
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('senderName');
+      const msgInput = document.getElementById('senderMsg');
+
+      const newMsg = {
+        name: nameInput.value.trim(),
+        text: msgInput.value.trim()
+      };
+
+      messages.push(newMsg);
+      localStorage.setItem('saudi_messages', JSON.stringify(messages));
+
+      nameInput.value = '';
+      msgInput.value = '';
+
+      updateDisplay();
+      alert('شكراً لكِ! تمت إضافة رسالتكِ بنجاح إلى خريطة ولاء الوطن 🇸🇦💚');
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // التشغيل الأولي
+    updateDisplay();
+  </script>
+</body>
+</html>
